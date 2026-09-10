@@ -1,0 +1,43 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { visibleEntries } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const entries = visibleEntries(await getCollection('blog'));
+  return entries.map((entry, index) => ({
+    params: { id: entry.id },
+    props: {
+      entry,
+      previous: entries[index + 1],
+      next: entries[index - 1],
+    },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'blog'>;
+  previous?: CollectionEntry<'blog'>;
+  next?: CollectionEntry<'blog'>;
+}
+
+const { entry, previous, next } = Astro.props;
+const { Content } = await render(entry);
+const allContent = [
+  ...(await getCollection('guides')),
+  ...(await getCollection('projects')),
+].filter((item) => !item.data.draft);
+const related = allContent
+  .filter((item) => item.data.tags.some((tag) => entry.data.tags.includes(tag)))
+  .slice(0, 3);
+---
+
+<ArticleLayout
+  entry={entry}
+  collection="blog"
+  previous={previous}
+  next={next}
+  related={related}
+>
+  <Content />
+</ArticleLayout>

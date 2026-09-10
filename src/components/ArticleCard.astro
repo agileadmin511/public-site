@@ -1,0 +1,28 @@
+---
+import type { ContentEntry, SiteCollection } from '../lib/content';
+import { entryPath, prettyCollection } from '../lib/content';
+import { formatDate, isoDate } from '../lib/date';
+import TagList from './TagList.astro';
+
+interface Props {
+  entry: ContentEntry;
+  collection?: SiteCollection;
+  compact?: boolean;
+}
+
+const { entry, collection = entry.collection, compact = false } = Astro.props;
+---
+
+<article class:list={['article-card', { compact }]}>
+  <p class="eyebrow">{prettyCollection(collection)}</p>
+  <h3>
+    <a href={entryPath(collection, entry.id)}>{entry.data.title}</a>
+  </h3>
+  <p>{entry.data.description}</p>
+  <div class="card-meta">
+    <time datetime={isoDate(entry.data.pubDate)}>
+      {formatDate(entry.data.pubDate)}
+    </time>
+    <TagList tags={entry.data.tags.slice(0, compact ? 2 : 3)} />
+  </div>
+</article>

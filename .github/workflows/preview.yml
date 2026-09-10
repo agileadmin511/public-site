@@ -1,0 +1,47 @@
+name: PR preview artifact
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static preview
+        run: npm run build
+
+      - name: Verify preview output
+        run: npm run test:output
+
+      - name: Upload preview artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: site-preview-pr-${{ github.event.pull_request.number }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Add preview instructions to the workflow summary
+        run: |
+          echo '## Preview ready' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Download the `site-preview-pr-${{ github.event.pull_request.number }}` artifact and serve it with `npx serve` or `python -m http.server`.' >> "$GITHUB_STEP_SUMMARY"

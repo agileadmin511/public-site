@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">A request moving through a web system</title>
+  <desc id="desc">Browser, load balancer, application, and database connected from left to right</desc>
+  <rect width="960" height="420" fill="#0d1922"/>
+  <g fill="#12232e" stroke="#5ee1c7" stroke-width="3">
+    <rect x="55" y="155" width="150" height="110" rx="8"/>
+    <rect x="285" y="155" width="150" height="110" rx="8"/>
+    <rect x="515" y="155" width="150" height="110" rx="8"/>
+    <rect x="745" y="155" width="150" height="110" rx="8"/>
+  </g>
+  <g fill="#e8f0f4" font-family="ui-monospace, monospace" font-size="22" text-anchor="middle">
+    <text x="130" y="216">Browser</text>
+    <text x="360" y="203">Load</text><text x="360" y="232">balancer</text>
+    <text x="590" y="216">Application</text>
+    <text x="820" y="216">Database</text>
+  </g>
+  <g stroke="#ffcb6b" stroke-width="4" fill="none">
+    <path d="M205 210h65"/><path d="m260 200 10 10-10 10"/>
+    <path d="M435 210h65"/><path d="m490 200 10 10-10 10"/>
+    <path d="M665 210h65"/><path d="m720 200 10 10-10 10"/>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import CollectionLayout from '../../layouts/CollectionLayout.astro';
+import { visibleEntries } from '../../lib/content';
+
+const entries = visibleEntries(await getCollection('projects'));
+---
+
+<CollectionLayout
+  title="Projects"
+  description="Build notes, architecture decisions, and lessons from software and infrastructure experiments."
+  collection="projects"
+  entries={entries}
+/>

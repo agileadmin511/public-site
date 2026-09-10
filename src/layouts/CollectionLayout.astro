@@ -1,0 +1,33 @@
+---
+import type { ContentEntry, SiteCollection } from '../lib/content';
+import ArticleCard from '../components/ArticleCard.astro';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  collection: SiteCollection;
+  entries: ContentEntry[];
+}
+
+const { title, description, collection, entries } = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={`/${collection}/`}
+>
+  <div class="page-shell">
+    <header class="page-header">
+      <p class="eyebrow">Archive</p>
+      <h1>{title}</h1>
+      <p>{description}</p>
+    </header>
+    <div class="card-list">
+      {entries.map((entry) => (
+        <ArticleCard entry={entry} collection={collection} />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

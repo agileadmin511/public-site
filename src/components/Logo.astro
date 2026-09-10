@@ -1,0 +1,27 @@
+---
+interface Props {
+  size?: number;
+}
+
+const { size = 36 } = Astro.props;
+---
+
+<svg
+  class="site-logo"
+  width={size}
+  height={size}
+  viewBox="0 0 40 40"
+  role="img"
+  aria-labelledby="logo-title"
+>
+  <title id="logo-title">Systems Field Notes logo</title>
+  <rect x="1" y="1" width="38" height="38" rx="8" fill="currentColor"></rect>
+  <path d="M10 12h8l4 4h8v12H10V12Z" fill="var(--color-canvas)"></path>
+  <path
+    d="m14 20 3 3-3 3M20 26h6"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.2"
+    stroke-linecap="square"
+  ></path>
+</svg>

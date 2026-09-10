@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import CollectionLayout from '../../layouts/CollectionLayout.astro';
+import { visibleEntries } from '../../lib/content';
+
+const entries = visibleEntries(await getCollection('guides'));
+---
+
+<CollectionLayout
+  title="Guides"
+  description="Durable, task-focused references for infrastructure and software engineering work."
+  collection="guides"
+  entries={entries}
+/>

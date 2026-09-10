@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from '../components/ArticleCard.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { visibleEntries } from '../lib/content';
+
+const [blog, guides, projects] = await Promise.all([
+  getCollection('blog'),
+  getCollection('guides'),
+  getCollection('projects'),
+]);
+
+const recentPosts = visibleEntries(blog).slice(0, 3);
+const selectedGuides = visibleEntries(guides).slice(0, 2);
+const selectedProjects = visibleEntries(projects).slice(0, 1);
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Systems Field Notes / 001</p>
+      <h1>
+        Build clearly. <span>Operate calmly.</span>
+      </h1>
+      <p class="hero-copy">
+        Practical writing about the machinery beneath modern software:
+        infrastructure, reliability, networking, and the engineering decisions
+        that keep systems understandable.
+      </p>
+    </div>
+    <aside class="hero-note" aria-label="Publication status">
+      <p>
+        <span class="prompt">$</span> publication --status
+      </p>
+      <p>
+        Static by design.
+        <br />
+        Source-controlled.
+        <br />
+        Written for practitioners.
+      </p>
+    </aside>
+  </section>
+
+  <section class="homepage-section" aria-labelledby="recent-posts">
+    <SectionHeading title="Recent posts" href="/blog/" linkLabel="All posts" />
+    <div class="card-grid" id="recent-posts">
+      {recentPosts.map((entry) => (
+        <ArticleCard entry={entry} collection="blog" />
+      ))}
+    </div>
+  </section>
+
+  <section class="homepage-section" aria-labelledby="selected-guides">
+    <SectionHeading
+      title="Selected guides"
+      href="/guides/"
+      linkLabel="All guides"
+    />
+    <div class="card-grid" id="selected-guides">
+      {selectedGuides.map((entry) => (
+        <ArticleCard entry={entry} collection="guides" />
+      ))}
+    </div>
+  </section>
+
+  <section class="homepage-section" aria-labelledby="selected-projects">
+    <SectionHeading
+      title="Projects"
+      href="/projects/"
+      linkLabel="All projects"
+    />
+    <div class="card-grid" id="selected-projects">
+      {selectedProjects.map((entry) => (
+        <ArticleCard entry={entry} collection="projects" />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

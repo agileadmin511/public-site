@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import CollectionLayout from '../../layouts/CollectionLayout.astro';
+import { visibleEntries } from '../../lib/content';
+
+const entries = visibleEntries(await getCollection('blog'));
+---
+
+<CollectionLayout
+  title="Blog"
+  description="Experience reports, technical arguments, and shorter notes from building and operating software."
+  collection="blog"
+  entries={entries}
+/>

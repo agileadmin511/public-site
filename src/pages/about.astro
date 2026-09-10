@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config';
+---
+
+<BaseLayout
+  title="About"
+  description={`About ${SITE.name}, a practical software and infrastructure publication.`}
+  canonicalPath="/about/"
+>
+  <div class="page-shell">
+    <header class="page-header">
+      <p class="eyebrow">About</p>
+      <h1>Notes from inside the system.</h1>
+      <p>
+        {SITE.name} is a working notebook for software builders: part
+        engineering journal, part durable knowledge base.
+      </p>
+    </header>
+    <div class="prose">
+      <h2>What belongs here</h2>
+      <p>
+        Posts capture experience and opinion. Guides turn repeatable work into
+        documentation. Projects record the design and trade-offs behind things
+        that were built.
+      </p>
+      <h2>How it is made</h2>
+      <p>
+        Every page begins as a Markdown file in Git. Astro turns that source
+        into static HTML, and GitHub Pages serves the result without an
+        application server, database, or runtime.
+      </p>
+      <p class="notice">
+        This starter contains clearly marked example writing. Replace it with
+        your own name, links, and field notes before launch.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
