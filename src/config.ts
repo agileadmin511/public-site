@@ -1,12 +1,12 @@
 export const SITE = {
-  name: 'Systems Field Notes',
-  shortName: 'SFN',
-  tagline: 'Infrastructure · Software · Engineering',
+  name: 'The Agile Admin',
+  shortName: 'AGILE',
+  tagline: 'Move fast, break all the things!',
   description:
     'Practical notes on building, operating, and understanding software systems.',
-  url: 'https://blog.example.com',
-  author: 'Your Name',
-  githubUrl: 'https://github.com/your-username',
+  /*url: 'https://blog.example.com',*/
+  author: 'The Agileadmin',
+  githubUrl: 'https://github.com/agileadmin511',
   navigation: [
     { href: '/blog/', label: 'Blog' },
     { href: '/guides/', label: 'Guides' },
