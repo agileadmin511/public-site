@@ -4,7 +4,7 @@ export const SITE = {
   tagline: 'Move fast, break all the things!',
   description:
     'Practical notes on building, operating, and understanding software systems.',
-  /*url: 'https://blog.example.com',*/
+  url: 'https://blog.agileadmin.dev',
   author: 'The Agileadmin',
   githubUrl: 'https://github.com/agileadmin511',
   navigation: [
