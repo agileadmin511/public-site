@@ -2,6 +2,7 @@
 import type { ContentEntry, SiteCollection } from '../lib/content';
 import ArticleCard from '../components/ArticleCard.astro';
 import BaseLayout from './BaseLayout.astro';
+import { sitePath } from '../lib/url';
 
 interface Props {
   title: string;
@@ -16,7 +17,7 @@ const { title, description, collection, entries } = Astro.props;
 <BaseLayout
   title={title}
   description={description}
-  canonicalPath={`/${collection}/`}
+  canonicalPath={sitePath(`/${collection}/`)}
 >
   <div class="page-shell">
     <header class="page-header">

@@ -13,7 +13,7 @@ draft: false
 
 Before choosing an observability platform, follow one request by hand. The exercise reveals which boundaries already produce useful evidence and which are silent.
 
-<img src="/images/request-path.svg" width="960" height="420" alt="A request moving from a browser through a load balancer and application to a database" />
+<img src="../../images/request-path.svg" width="960" height="420" alt="A request moving from a browser through a load balancer and application to a database" />
 
 ## Start with a request identifier
 

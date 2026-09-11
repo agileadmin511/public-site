@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../config';
+import { sitePath } from '../lib/url';
 ---
 
 <BaseLayout
   title="About"
   description={`About ${SITE.name}, a practical software and infrastructure publication.`}
-  canonicalPath="/about/"
+  canonicalPath={sitePath('/about/')}
 >
   <div class="page-shell">
     <header class="page-header">

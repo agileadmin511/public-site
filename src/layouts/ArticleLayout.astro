@@ -4,6 +4,7 @@ import { entryPath, prettyCollection } from '../lib/content';
 import { formatDate, isoDate } from '../lib/date';
 import BaseLayout from './BaseLayout.astro';
 import TagList from '../components/TagList.astro';
+import { sitePath } from '../lib/url';
 
 interface Props {
   entry: ContentEntry;
@@ -28,7 +29,7 @@ const returnLabel = collection === 'blog' ? 'blog' : collection;
 >
   <article class="article-shell">
     <header class="article-header">
-      <a class="back-link" href={`/${collection}/`}>
+      <a class="back-link" href={sitePath(`/${collection}/`)}>
         ← Back to {returnLabel}
       </a>
       <p class="eyebrow">{prettyCollection(collection)}</p>
@@ -97,8 +98,8 @@ const returnLabel = collection === 'blog' ? 'blog' : collection;
       )}
 
       <div class="article-actions">
-        <a href={`/${collection}/`}>All {returnLabel}</a>
-        <a href="/rss.xml">Subscribe via RSS</a>
+        <a href={sitePath(`/${collection}/`)}>All {returnLabel}</a>
+        <a href={sitePath('/rss.xml')}>Subscribe via RSS</a>
       </div>
     </footer>
   </article>

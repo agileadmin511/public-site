@@ -54,4 +54,4 @@ Open another terminal and check the host's name. It remains unchanged because th
 
 Namespaces are not a complete security boundary. A production container also needs least-privilege capabilities, syscall filtering, sensible mounts, resource controls, and an appropriately configured runtime. Isolation is a composition, not a switch.
 
-For a broader operational view, continue with the [Linux networking guide](/guides/linux-networking/).
+For a broader operational view, continue with the [Linux networking guide](../../guides/linux-networking/).

@@ -95,7 +95,7 @@ Store repository-managed images under `public/images/` using descriptive filenam
 
 ```html
 <img
-  src="/images/network-path.svg"
+  src="../../images/network-path.svg"
   width="960"
   height="420"
   alt="A request moving through four network services"
@@ -111,13 +111,14 @@ The central site settings live in `src/config.ts`:
 - publication name and short name
 - tagline and description
 - canonical URL
+- GitHub Pages base path
 - author
 - GitHub link
 - primary navigation
 
-The Astro configuration imports the same canonical URL, so it is not duplicated. Change the logo in `src/components/Logo.astro`, the browser icon in `public/favicon.svg`, and design tokens near the top of `src/styles/global.css`.
+The Astro configuration imports the same canonical URL and base path, so they are not duplicated. Internal links pass through `sitePath()` in `src/lib/url.ts`. Change the logo in `src/components/Logo.astro`, the browser icon in `public/favicon.svg`, and design tokens near the top of `src/styles/global.css`.
 
-The placeholder domain is `https://blog.example.com`. Replace it before the first production deployment.
+The current production target is `https://agileadmin511.github.io/public-site/`. Here, `SITE.url` is the GitHub Pages origin and `SITE.basePath` is the repository segment.
 
 ## Publishing workflow
 
@@ -153,9 +154,8 @@ The production workflow uses Astro's official Pages build action and GitHub's of
 1. Push this project to a GitHub repository whose production branch is `main`.
 2. In **Settings → Pages → Build and deployment**, choose **GitHub Actions** as the source.
 3. In **Settings → Environments → github-pages**, optionally restrict deployments to `main`.
-4. Replace the placeholder `SITE.url` in `src/config.ts`.
-5. Add the real hostname under **Settings → Pages → Custom domain**.
-6. Push to `main` or manually run **Deploy to GitHub Pages**.
+4. Confirm `SITE.url` is `https://agileadmin511.github.io` and `SITE.basePath` is `/public-site`.
+5. Push to `main` or manually run **Deploy to GitHub Pages**.
 
 GitHub ignores and does not require a `CNAME` file when Pages publishes through a custom Actions workflow, so this repository does not include one.
 
@@ -164,6 +164,8 @@ The deploy workflow has `contents: read`, `pages: write`, and `id-token: write`.
 ## Custom domain and DNS
 
 Configure the custom domain in the GitHub repository's **Settings → Pages** area before changing DNS. GitHub displays domain verification and DNS status there.
+
+When adopting a custom domain, set `SITE.url` to the full custom origin and set `SITE.basePath` to an empty string. Rebuild after changing both values.
 
 For a subdomain such as `blog.example.com`:
 
@@ -193,10 +195,11 @@ IPv6 support is optional; if enabled, keep the `A` records and add all four `AAA
 
 Alternatively, a DNS provider that supports apex `ALIAS` or `ANAME` records can point `@` to `<your-github-username>.github.io`. Do not use wildcard DNS records. GitHub recommends also pointing `www` to `<your-github-username>.github.io` with a `CNAME` when using an apex domain. After GitHub confirms the domain, enable **Enforce HTTPS**.
 
-Keep two values aligned:
+Keep these values aligned:
 
 1. `SITE.url` in `src/config.ts`, including `https://` and no trailing slash
-2. The custom domain in GitHub Pages settings
+2. `SITE.basePath`: `/public-site` for the current GitHub project URL, or empty for a custom domain
+3. The custom domain in GitHub Pages settings, when one is used
 
 The generated canonical links, Open Graph URLs, RSS URLs, robots file, and sitemap all derive from the centralized URL.
 
@@ -226,15 +229,15 @@ Run `npm test`. The build verification checks the draft route, blog index, RSS f
 
 ### The deployed site has broken links or assets
 
-This starter assumes a custom domain and root-relative URLs. Confirm `SITE.url`, `public/CNAME`, and the Pages custom-domain setting agree. If deploying to `username.github.io/repository` without a custom domain, configure Astro's `base` option and update internal URL construction consistently.
+The current configuration targets `https://agileadmin511.github.io/public-site/`. Confirm `SITE.url`, `SITE.basePath`, and the URL shown in the successful deployment agree. Internal template links must use `sitePath()`; links written directly in Markdown should be relative so they remain beneath the project path.
 
 ### GitHub Pages deployment fails
 
 Confirm Pages uses **GitHub Actions** as its source, Actions are enabled, the `github-pages` environment permits `main`, and the lockfile is committed. Open the failed job before rerunning it; build failures are usually content validation errors.
 
-### RSS or sitemap URLs show the placeholder domain
+### RSS or sitemap URLs show the wrong origin or path
 
-Replace `SITE.url` in `src/config.ts`, rebuild, and confirm the generated files in `dist/`.
+Correct `SITE.url` and `SITE.basePath` in `src/config.ts`, rebuild, and confirm the generated files in `dist/`.
 
 ## Repository map
 

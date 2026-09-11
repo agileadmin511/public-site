@@ -1,4 +1,5 @@
 import type { CollectionEntry, CollectionKey } from 'astro:content';
+import { sitePath } from './url';
 
 export type SiteCollection = 'blog' | 'guides' | 'projects';
 export type ContentEntry = CollectionEntry<SiteCollection>;
@@ -20,7 +21,7 @@ export function visibleEntries<T extends CollectionKey>(
 }
 
 export function entryPath(collection: SiteCollection, id: string): string {
-  return `/${collection}/${id}/`;
+  return sitePath(`/${collection}/${id}/`);
 }
 
 export function prettyCollection(collection: SiteCollection): string {

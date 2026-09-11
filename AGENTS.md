@@ -32,7 +32,7 @@ Published filenames are public IDs and URLs. Do not rename them casually. Place 
 
 ## Site configuration
 
-`src/config.ts` is the central source for the publication identity, canonical origin, author, social link, and navigation. `astro.config.mjs` imports the canonical origin. Do not scatter domains or brand values through templates.
+`src/config.ts` is the central source for the publication identity, canonical origin, GitHub Pages base path, author, social link, and navigation. `astro.config.mjs` imports the canonical origin and base path. Internal links in templates must use `sitePath()` from `src/lib/url.ts`; links authored directly in Markdown should be relative. Do not scatter domains, repository paths, or brand values through templates.
 
 Shared design tokens and responsive rules live in `src/styles/global.css`. Preserve the restrained, readable engineering-publication character. Prefer semantic HTML and CSS. The site must remain functional without client-side JavaScript.
 

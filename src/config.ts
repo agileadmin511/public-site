@@ -1,12 +1,13 @@
 export const SITE = {
-  name: 'The Agile Admin',
-  shortName: 'AGILE',
-  tagline: 'Move fast, break all the things!',
+  name: 'Systems Field Notes',
+  shortName: 'SFN',
+  tagline: 'Infrastructure · Software · Engineering',
   description:
     'Practical notes on building, operating, and understanding software systems.',
-  url: 'https://blog.agileadmin.dev',
-  author: 'The Agileadmin',
-  githubUrl: 'https://github.com/agileadmin511',
+  url: 'https://agileadmin511.github.io',
+  basePath: '/public-site',
+  author: 'Your Name',
+  githubUrl: 'https://github.com/agileadmin511/public-site',
   navigation: [
     { href: '/blog/', label: 'Blog' },
     { href: '/guides/', label: 'Guides' },

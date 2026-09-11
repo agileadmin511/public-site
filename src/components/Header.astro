@@ -1,15 +1,20 @@
 ---
 import Logo from './Logo.astro';
 import { SITE } from '../config';
+import { sitePath } from '../lib/url';
 
 const currentPath = Astro.url.pathname;
-const isActive = (href: string) =>
-  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+const isActive = (href: string) => {
+  const resolvedHref = sitePath(href);
+  return href === '/'
+    ? currentPath === resolvedHref
+    : currentPath.startsWith(resolvedHref);
+};
 ---
 
 <header class="site-header">
   <div class="header-inner">
-    <a class="brand" href="/" aria-label={`${SITE.name} home`}>
+    <a class="brand" href={sitePath('/')} aria-label={`${SITE.name} home`}>
       <Logo />
       <span>
         <strong>{SITE.name}</strong>
@@ -20,7 +25,7 @@ const isActive = (href: string) =>
     <nav class="desktop-nav" aria-label="Primary navigation">
       {SITE.navigation.map((item) => (
         <a
-          href={item.href}
+          href={sitePath(item.href)}
           aria-current={isActive(item.href) ? 'page' : undefined}
         >
           {item.label}
@@ -33,7 +38,7 @@ const isActive = (href: string) =>
       <nav aria-label="Mobile navigation">
         {SITE.navigation.map((item) => (
           <a
-            href={item.href}
+            href={sitePath(item.href)}
             aria-current={isActive(item.href) ? 'page' : undefined}
           >
             {item.label}

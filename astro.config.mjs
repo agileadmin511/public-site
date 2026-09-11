@@ -7,6 +7,7 @@ import { SITE } from './src/config.ts';
 
 export default defineConfig({
   site: SITE.url,
+  base: SITE.basePath,
   output: 'static',
   integrations: [mdx(), sitemap()],
   markdown: {
